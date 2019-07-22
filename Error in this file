@@ -1,0 +1,27 @@
+images_train = []
+labels_train = []
+
+images = train['image_id'].values
+for image_id in tqdm_notebook(images):
+    
+    image = np.array(cv.imread(training_path + image_id))
+    label = train[train['image_id'] == image_id]['category'].values[0]
+    
+    images_train.append(image)
+    labels_train.append(label)
+    
+    images_train.append(np.flip(image))
+    labels_train.append(label)
+    
+    images_train.append(np.flipud(image))
+    labels_train.append(label)
+    
+    images_train.append(np.fliplr(image))
+    labels_train.append(label)
+    
+    
+images_train = np.asarray(images_train)
+images_train = images_train.astype('float32')
+images_train /= 255.
+
+labels_train = np.asarray(labels_train)
