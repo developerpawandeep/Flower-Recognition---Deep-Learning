@@ -1,0 +1,22 @@
+def plot_training_curves(history):
+    acc = history.history['acc']
+    val_acc = history.history['val_acc']
+    loss = history.history['loss']
+    val_loss = history.history['val_loss']
+    
+    epochs = range(1, len(acc) + 1)
+    
+    plt.plot(epochs, loss, 'r', label='Training loss')
+    plt.plot(epochs, val_loss, 'g', label='Validation loss')
+    plt.title('Losses')
+    plt.legend()
+    plt.figure()
+    
+    plt.plot(epochs, acc, 'r', label='Training acc')
+    plt.plot(epochs, val_acc, 'g', label='Validation acc')
+    plt.title('Accuracies')
+    plt.legend()
+    plt.figure()
+    
+    plt.show()
+    
