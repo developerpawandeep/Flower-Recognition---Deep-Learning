@@ -1,0 +1,61 @@
+def create_model():
+    model = Sequential()
+        
+    model.add(Conv2D(3, kernel_size = 3, activation = 'relu', input_shape = (32, 32, 3)))
+    
+    model.add(Conv2D(filters = 16, kernel_size = 3, activation = 'relu'))
+    model.add(Conv2D(filters = 16, kernel_size = 3, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Dropout(0.2))
+    
+    model.add(DepthwiseConv2D(kernel_size = 3, strides = 1, padding = 'Same', use_bias = True))
+    model.add(Conv2D(filters = 32, kernel_size = 1, activation = 'relu'))
+    model.add(Conv2D(filters = 64, kernel_size = 1, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Dropout(0.2))
+    
+    model.add(DepthwiseConv2D(kernel_size = 3, strides = 2, padding = 'Same', use_bias = True))
+    model.add(Conv2D(filters = 128, kernel_size = 1, activation = 'relu'))
+    model.add(Conv2D(filters = 256, kernel_size = 1, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Dropout(0.2))
+    
+    model.add(DepthwiseConv2D(kernel_size = 3, strides = 1, padding = 'Same', use_bias = True))
+    model.add(Conv2D(filters = 256, kernel_size = 1, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Conv2D(filters = 512, kernel_size = 1, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Dropout(0.2))
+    
+    model.add(DepthwiseConv2D(kernel_size = 3, strides = 2, padding = 'Same', use_bias = True))
+    model.add(Conv2D(filters = 512, kernel_size = 1, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Conv2D(filters = 1024, kernel_size = 1, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Dropout(0.2))
+    
+    model.add(DepthwiseConv2D(kernel_size = 3, strides = 1, padding = 'Same', use_bias = True))
+    model.add(Conv2D(filters = 1024, kernel_size = 1, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Conv2D(filters = 2048, kernel_size = 1, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Dropout(0.2))
+    
+    #model.add(GlobalAveragePooling2D())
+    model.add(Flatten())
+    
+    model.add(Dense(470, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Dropout(0.5))
+    
+    model.add(Dense(256, activation = 'relu'))
+    model.add(BatchNormalization())
+    model.add(Dropout(0.5))
+    
+    model.add(Dense(128, activation = 'tanh'))
+
+    model.add(Dense(1, activation = 'sigmoid'))
+
+    model.compile(optimizer = 'rmsprop', loss = 'mean_squared_error', metrics = ['accuracy'])
+    
+    return model
