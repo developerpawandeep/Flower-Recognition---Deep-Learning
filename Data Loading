@@ -1,0 +1,3 @@
+train = pd.read_csv('../input/he_challenge_data/data/train.csv')
+test = pd.read_csv('../input/he_challenge_data/data/test.csv')
+sample = pd.read_csv('../input/he_challenge_data/data/sample_submission.csv')
