@@ -1,0 +1,10 @@
+file_path = 'weights-aerial-cactus.h5'
+
+callbacks = [
+        ModelCheckpoint(file_path, monitor = 'val_acc', verbose = 1, save_best_only = True, mode = 'max'),
+        ReduceLROnPlateau(monitor = 'val_loss', factor = 0.2, patience = 3, verbose = 1, mode = 'min', min_lr = 0.00001),
+        EarlyStopping(monitor = 'val_loss', min_delta = 1e-10, patience = 15, verbose = 1, restore_best_weights = True)
+        ]
+
+training_path = '../input/HE_Challenge_data/data/train/'
+test_path = '../input/HE_Challenge_data/data/test/'
